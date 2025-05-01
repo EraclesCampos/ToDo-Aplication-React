@@ -18,7 +18,7 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
         setTextarea(taskToEdit.description.trim())
         setDateInput(taskToEdit.date)
     }
-    , [idTaskEdit, tasks])
+    , [idTaskEdit, tasks, isOpenFormEdit])
     
     useEffect(() => {
         if (isOpenFormEdit) setVisible(true)
