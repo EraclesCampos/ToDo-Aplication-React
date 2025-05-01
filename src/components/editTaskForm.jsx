@@ -49,7 +49,7 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
         setInput('')
         setTextarea('')
         setDateInput('')
-        onClose()
+        closeModal()
         // console.log(tarea)
     }
 

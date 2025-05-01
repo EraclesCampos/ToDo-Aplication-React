@@ -35,7 +35,7 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
         input.value = ''
         textarea.value = ''
         dateInput.value = ''
-        onClose()
+        closeModal()
         // console.log(tarea)
     }
 
