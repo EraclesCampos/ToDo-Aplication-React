@@ -26,12 +26,16 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
             return;
         }
         const tarea = {
-        id: Date.now(),
-        title: input.value.trim(),
-        description: textarea.value.trim(),
-        date: dateInput.value
+            id: Date.now(),
+            title: input.value.trim(),
+            description: textarea.value.trim(),
+            date: dateInput.value,
+            completed: false,
         }
-        setTasks(tareas => [...tareas, tarea])
+        const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
+        tasks.push(tarea)
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        setTasks(tasks)
         input.value = ''
         textarea.value = ''
         dateInput.value = ''

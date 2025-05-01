@@ -39,11 +39,13 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
             id: Date.now(),
             title: input,
             description: textarea,
-            date: dateInput
+            date: dateInput,
+            completed: false,
         }
         const index = tasks.findIndex(task => task.id === idTaskEdit)
         const newTasks = [...tasks]
         newTasks[index] = tarea
+        localStorage.setItem('tasks', JSON.stringify(newTasks))
         setTasks(newTasks)
 
         setInput('')
