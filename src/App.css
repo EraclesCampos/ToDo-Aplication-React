@@ -336,8 +336,17 @@ textarea{
   background-color: rgb(186, 1, 1);
 }
 
-.modal-animation{
+.form-animation-entered{
   animation: aparecer .3s ease-in-out;
+}
+.form-animation-leaving{
+  animation: desaparecer .3s ease-in-out;
+}
+.modal-animation-leaving{
+  animation: modal-desaparecer .3s ease-in-out;
+}
+.modal-animation-entered{
+  animation: modal-aparecer .3s ease-in-out;
 }
 
 /* --media-querys-- */
@@ -360,4 +369,16 @@ textarea{
 @keyframes aparecer {
   0% { transform: scale(0.8); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
+}
+@keyframes desaparecer {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0; }
+}
+@keyframes modal-aparecer {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes modal-desaparecer {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }

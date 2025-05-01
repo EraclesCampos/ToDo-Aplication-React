@@ -1,39 +1,52 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../App.css'
 
-export function AddTareaForm({isOpenFormAdd, setIsOpenFormAdd, setTasks}) {
+export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
     const [error, setError] = useState(false)
+    const [visible, setVisible] = useState(isOpenFormAdd)
+
+    // console.log(isOpenFormAdd)
+
+    useEffect(() => {
+        if (isOpenFormAdd) setVisible(true)
+        else setTimeout(() => setVisible(false), 250)
+        
+    }, [isOpenFormAdd])
+
+    if (!visible) return null;
+
     const handleSubmit = (e)=>{
         e.preventDefault()
         const input = document.getElementById('add-input')
         const textarea = document.getElementById('descripcion-input')
         const dateInput = document.getElementById('date-input')
-        if(!input.value){
+        if(!input.value.trim()){
             setError(true)
-            return
+            return;
         }
         const tarea = {
         id: Date.now(),
-        title: input.value,
-        description: textarea.value,
+        title: input.value.trim(),
+        description: textarea.value.trim(),
         date: dateInput.value
         }
         setTasks(tareas => [...tareas, tarea])
         input.value = ''
         textarea.value = ''
         dateInput.value = ''
-        setIsOpenFormAdd(false)
-        console.log(tarea)
+        onClose()
+        // console.log(tarea)
     }
 
-    const closeModal = () => {
-        setIsOpenFormAdd(false)
+    const closeModal = ()=>{
+        onClose()
+        setError(false)
     }
     
     return (
-        <div className="add-modal modal showed">
-            <form className="form-modal-container modal-animation">
+        <div className={`add-modal modal showed ${isOpenFormAdd ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
+            <form className={`form-modal-container ${isOpenFormAdd ? 'form-animation-entered' : 'form-animation-leaving'}`} onClick={(e) => e.stopPropagation()}>
                 <h2>Agregar nueva tarea</h2>
                 <div>
                     <label htmlFor="add-input">Titulo</label>
@@ -52,7 +65,7 @@ export function AddTareaForm({isOpenFormAdd, setIsOpenFormAdd, setTasks}) {
                     <input type="button" value="Cancelar" className="cancelForm" onClick={closeModal}/>
                     <input type="submit" value="Agregar" className="addForm" onClick={handleSubmit}/>
                 </div>
-            </form>
+            </form>       
         </div>
     )
 }

@@ -17,7 +17,6 @@ function App() {
         <img src="images/checked.png" alt="completadas" title="completadas" className="completadas" />
         <h1 className="title">Tu lista de tareas</h1>
         <div className="tareas-container">
-            {/* Aqui van las tareas */}
             {tasks.length === 0 ? 
               <p>No hay tareas pendientes</p>
               :
@@ -40,8 +39,8 @@ function App() {
             <button className="add" title="agregar" onClick={()=>setIsOpenFormAdd(!isOpenFormAdd)}><img src="images/add.png" alt="agregar" /></button>
         </div>
       </div>
-      {isOpenFormAdd && <AddTareaForm isOpenFormAdd={isOpenFormAdd} setIsOpenFormAdd={setIsOpenFormAdd} setTasks={setTasks}/>}
-      {isOpenFormEdit && <EditTaskForm isOpenFormEdit={isOpenFormEdit} setIsOpenFormEdit={setIsOpenFormEdit} setTasks={setTasks} tasks={tasks} idTaskEdit={idTaskEdit}/>}
+      <AddTareaForm isOpenFormAdd={isOpenFormAdd} setTasks={setTasks} onClose={()=>setIsOpenFormAdd(false)}/>
+      <EditTaskForm isOpenFormEdit={isOpenFormEdit} setTasks={setTasks} tasks={tasks} idTaskEdit={idTaskEdit} onClose={()=>setIsOpenFormEdit(false)}/>
   
     </>
   )
