@@ -19,6 +19,54 @@ function App() {
 
   const filterTasksCompleted = tasks.filter(task => task.completed === false)
 
+  useEffect(() => {
+    if(Notification.permission !== 'granted') {
+      Notification.requestPermission()
+    }
+  },[])
+
+  // manejo de notificaciones
+  useEffect(() => {
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission()
+    }
+  
+    const notifiedTasks = new Set()
+  
+    const interval = setInterval(() => {
+      const ahora = new Date()
+  
+      tasks.forEach(task => {
+        const fechaRecordatorio = new Date(task.date)
+        if (!task.completed && fechaRecordatorio <= ahora) {
+          mostrarNotificacion(task.title)
+          notifiedTasks.add(task.id)
+        }
+      })
+      console.log("verificado")
+    }, 60000)
+  
+    return () => clearInterval(interval)
+  }, [tasks])
+
+  function mostrarNotificacion(task) {
+    if (Notification.permission === 'granted') {
+      new Notification('Tarea pendiente', {
+        body: `Recordatorio de tarea: ${task}`,
+        icon: 'images/checked.ico'
+      })
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+          new Notification('Tarea pendiente', {
+            body: `Recordatorio de tarea: ${task}`,
+            icon: 'images/checked.ico'
+          })
+        }
+      })
+    }
+  }
+
   return (
     <>
       <div className="global-container">
