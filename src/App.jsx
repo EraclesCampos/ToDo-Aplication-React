@@ -3,6 +3,8 @@ import './App.css'
 import { AddTareaForm } from './components/addTaskForm'
 import { EditTaskForm } from './components/editTaskForm'
 import { CompleteModal } from './components/completeModal'
+import { DeleteModal } from './components/deleteModal'
+import { DetailsModal } from './components/detailsModal'
 
 
 function App() {
@@ -10,9 +12,9 @@ function App() {
   // const [task, setTarea] = useState('')
   const [isOpenFormAdd, setIsOpenFormAdd] = useState(false)
   const [isOpenFormEdit, setIsOpenFormEdit] = useState(false)
-  const [showComplete, setShowComplete] = useState(false)
-  const [showDelete, setShowDelete] = useState(false)
-  const [showDetailsTask, setShowDetailsTask] = useState(false)
+  const [isShowComplete, setShowComplete] = useState(false)
+  const [isShowDelete, setShowDelete] = useState(false)
+  const [isShowDetailsTask, setShowDetailsTask] = useState(false)
   const [idTask, setIdTask] = useState(null)
 
   const filterTasksCompleted = tasks.filter(task => task.completed === false)
@@ -35,9 +37,9 @@ function App() {
                 </div>
                 <div className="check-delete">
                     <button className='check' onClick={()=>{setIdTask(task.id); setShowComplete(true)}}><img src='images/check.png'/></button>   
-                    <button className="delete" onClick={()=>setShowDelete(true)}><img src='images/delete.png'/></button>
-                    <button className='edit' onClick={()=>{setIdTask(task.id); setIsOpenFormEdit(!isOpenFormEdit)}}><img src='images/edit.png'/></button>
-                    <button className="details" onClick={()=>setShowDetailsTask(true)}><img src='images/info.png'/></button>
+                    <button className="delete" onClick={()=>{setIdTask(task.id); setShowDelete(true)}}><img src='images/delete.png'/></button>
+                    <button className='edit' onClick={()=>{setIdTask(task.id); setIsOpenFormEdit(true)}}><img src='images/edit.png'/></button>
+                    <button className="details" onClick={()=>{setIdTask(task.id); setShowDetailsTask(true)}}><img src='images/info.png'/></button>
                     <input type="hidden" value={task.id} />
                 </div>
               </div>)
@@ -49,9 +51,9 @@ function App() {
       </div>
       <AddTareaForm isOpenFormAdd={isOpenFormAdd} setTasks={setTasks} onClose={()=>setIsOpenFormAdd(false)}/>
       <EditTaskForm isOpenFormEdit={isOpenFormEdit} setTasks={setTasks} tasks={tasks} idTaskEdit={idTask} onClose={()=>setIsOpenFormEdit(false)}/>
-      <CompleteModal showComplete={showComplete} setTasks={setTasks} idTask={idTask} onClose={()=>setShowComplete(false)}/>
-      {/* <DeleteModal showDelete={showDelete} setTasks={setTasks} idTask={idTaskEdit} onClose={()=>setShowDelete(false)}/> */}
-      {/* <DetailsModal showDetailsTask={showDetailsTask} setTasks={setTasks} idTask={idTaskEdit} onClose={()=>setShowDetailsTask(false)}/> */}
+      <CompleteModal isShowComplete={isShowComplete} setTasks={setTasks} idTask={idTask} onClose={()=>setShowComplete(false)}/>
+      <DeleteModal isShowDelete={isShowDelete} setTasks={setTasks} idTask={idTask} onClose={()=>setShowDelete(false)}/>
+      <DetailsModal isShowDetailsTask={isShowDetailsTask} tasks={tasks} idTask={idTask} onClose={()=>setShowDetailsTask(false)}/>
     </>
   )
 }

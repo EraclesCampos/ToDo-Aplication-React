@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import '../App.css'
-export function CompleteModal({ showComplete, setTasks, idTask, onClose}){
-     const [visible, setVisible] = useState(showComplete)
+export function CompleteModal({ isShowComplete, setTasks, idTask, onClose}){
+     const [visible, setVisible] = useState(isShowComplete)
     
     // console.log(isOpenFormAdd)
 
     useEffect(() => {
-        if (showComplete) setVisible(true)
+        if (isShowComplete) setVisible(true)
         else setTimeout(() => setVisible(false), 250)
         
-    }, [showComplete])
+    }, [isShowComplete])
 
     if (!visible) return null;
 
@@ -27,8 +27,8 @@ export function CompleteModal({ showComplete, setTasks, idTask, onClose}){
     }
 
     return(
-        <div className={`confirm-modal-complete modal showed ${showComplete ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-            <div className={`confirm-container-complete confirm-modal ${showComplete ? 'form-animation-entered' : 'form-animation-leaving'}`}  onClick={(e) => e.stopPropagation()}>
+        <div className={`confirm-modal-complete modal showed ${isShowComplete ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
+            <div className={`confirm-container-complete confirm-modal ${isShowComplete ? 'form-animation-entered' : 'form-animation-leaving'}`}  onClick={(e) => e.stopPropagation()}>
                 <img src="check.png" alt="" />
                 <h1>¿Seguro que deseas completar esta tarea?</h1>
                 <div>
