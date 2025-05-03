@@ -3,6 +3,7 @@ import '../App.css'
 export function DetailsModal({ isShowDetailsTask, tasks, idTask, onClose}){
     const [visible, setVisible] = useState(isShowDetailsTask)
     const task = tasks.find(task => task.id === idTask)
+    const fechaEscrita = task?.date ? new Date(task.date).toLocaleTimeString('es-ES',{ year: "numeric", month: "long", day: "numeric"}) : null
     
     useEffect(() => {
         if (isShowDetailsTask) setVisible(true)
@@ -33,7 +34,7 @@ export function DetailsModal({ isShowDetailsTask, tasks, idTask, onClose}){
                     </div>
                     <div>
                         <h4>Fecha</h4>
-                        {task.date ? <p className="taskDate infoTask">{task.date.replace('T', ' ')}</p> : <p className="taskDate infoTask">Sin fecha</p>}
+                        {task.date ? <p className="taskDate infoTask">{fechaEscrita}</p> : <p className="taskDate infoTask">Sin fecha</p>}
                         {/* <p className="taskDate"></p> */}
                     </div>   
                 </div>
