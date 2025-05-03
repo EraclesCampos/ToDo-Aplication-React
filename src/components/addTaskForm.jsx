@@ -49,8 +49,8 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
     }
     
     return (
-        <div className={`add-modal modal showed ${isOpenFormAdd ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-            <form className={`form-modal-container ${isOpenFormAdd ? 'form-animation-entered' : 'form-animation-leaving'}`} onClick={(e) => e.stopPropagation()}>
+        <div className={`add-modal modal showed ${isOpenFormAdd ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
+            <form className={`form-modal-container ${isOpenFormAdd ? 'modal-entered' : 'modal-leaving'}`} onClick={(e) => e.stopPropagation()}>
                 <h2>Agregar nueva tarea</h2>
                 <div>
                     <label htmlFor="add-input">Titulo</label>

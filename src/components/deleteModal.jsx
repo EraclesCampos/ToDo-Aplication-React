@@ -26,8 +26,8 @@ export function DeleteModal({ isShowDelete, setTasks, idTask, onClose}){
     }
 
     return(
-        <div className={`confirm-modal-delete modal showed ${isShowDelete ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-            <div className={`confirm-container-delete confirm-modal ${isShowDelete ? 'form-animation-entered' : 'form-animation-leaving'}`}  onClick={(e) => e.stopPropagation()}>
+        <div className={`confirm-modal-delete modal showed ${isShowDelete ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
+            <div className={`confirm-container-delete confirm-modal ${isShowDelete ? 'modal-entered' : 'modal-leaving'}`}  onClick={(e) => e.stopPropagation()}>
                 <img src="images/delete.png" alt="" />
                 <h1>¿Seguro que deseas eliminar esta tarea?</h1>
                 <div>

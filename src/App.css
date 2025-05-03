@@ -343,16 +343,16 @@ textarea{
   background-color: rgb(186, 1, 1);
 }
 
-.form-animation-entered{
+.modal-entered{
   animation: aparecer .3s ease-in-out;
 }
-.form-animation-leaving{
+.modal-leaving{
   animation: desaparecer .3s ease-in-out;
 }
-.modal-animation-leaving{
+.bg-modal-leaving{
   animation: modal-desaparecer .3s ease-in-out;
 }
-.modal-animation-entered{
+.bg-modal-entered{
   animation: modal-aparecer .3s ease-in-out;
 }
 

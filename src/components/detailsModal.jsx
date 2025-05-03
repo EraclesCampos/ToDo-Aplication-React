@@ -16,8 +16,8 @@ export function DetailsModal({ isShowDetailsTask, tasks, idTask, onClose}){
     if(!task) return null
     
     return(
-        <div className={`details-task-modal modal showed ${isShowDetailsTask ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-            <div className={`details-task-container ${isShowDetailsTask ? 'form-animation-entered' : 'form-animation-leaving'}`} onClick={(e) => e.stopPropagation()}>
+        <div className={`details-task-modal modal showed ${isShowDetailsTask ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
+            <div className={`details-task-container ${isShowDetailsTask ? 'modal-entered' : 'modal-leaving'}`} onClick={(e) => e.stopPropagation()}>
                 <img className="closeModal" src="images/close.png" title="cerrar" onClick={onClose} />
                 <h2>Detalles</h2>
                 <div>

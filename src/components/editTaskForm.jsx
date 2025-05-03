@@ -61,8 +61,8 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
     }
 
     return (
-        <div className={`edit-modal modal showed ${isOpenFormEdit ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-          <form className={`form-modal-container edit-form ${isOpenFormEdit ? 'form-animation-entered' : 'form-animation-leaving'}`} onClick={(e) => e.stopPropagation()}>
+        <div className={`edit-modal modal showed ${isOpenFormEdit ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
+          <form className={`form-modal-container edit-form ${isOpenFormEdit ? 'modal-entered' : 'modal-leaving'}`} onClick={(e) => e.stopPropagation()}>
               <h2>Editar tarea</h2>
               <div>
                   <label htmlFor="add-input-edit">Titulo</label>

@@ -84,11 +84,10 @@ function App() {
                     <h3>{task.title}</h3>
                 </div>
                 <div className="check-delete">
-                    <button className='check' onClick={()=>{setIdTask(task.id); setShowComplete(true)}}><img src='images/check.png'/></button>   
-                    <button className="delete" onClick={()=>{setIdTask(task.id); setShowDelete(true)}}><img src='images/delete.png'/></button>
-                    <button className='edit' onClick={()=>{setIdTask(task.id); setIsOpenFormEdit(true)}}><img src='images/edit.png'/></button>
-                    <button className="details" onClick={()=>{setIdTask(task.id); setShowDetailsTask(true)}}><img src='images/info.png'/></button>
-                    <input type="hidden" value={task.id} />
+                    <button className='check' title='Marcar tarea como completada' onClick={()=>{setIdTask(task.id); setShowComplete(true)}}><img src='images/check.png'/></button>   
+                    <button className="delete" title='Eliminar tarea' onClick={()=>{setIdTask(task.id); setShowDelete(true)}}><img src='images/delete.png'/></button>
+                    <button className='edit' title='Editar tarea' onClick={()=>{setIdTask(task.id); setIsOpenFormEdit(true)}}><img src='images/edit.png'/></button>
+                    <button className="details" title='Ver detalles de la tarea' onClick={()=>{setIdTask(task.id); setShowDetailsTask(true)}}><img src='images/info.png'/></button>
                 </div>
               </div>)
             })}

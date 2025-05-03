@@ -27,8 +27,8 @@ export function CompleteModal({ isShowComplete, setTasks, idTask, onClose}){
     }
 
     return(
-        <div className={`confirm-modal-complete modal showed ${isShowComplete ? 'modal-animation-entered' : 'modal-animation-leaving'}`} onClick={onClose}>
-            <div className={`confirm-container-complete confirm-modal ${isShowComplete ? 'form-animation-entered' : 'form-animation-leaving'}`}  onClick={(e) => e.stopPropagation()}>
+        <div className={`confirm-modal-complete modal showed ${isShowComplete ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
+            <div className={`confirm-container-complete confirm-modal ${isShowComplete ? 'modal-entered' : 'modal-leaving'}`}  onClick={(e) => e.stopPropagation()}>
                 <img src="images/check.png" alt="" />
                 <h1>¿Seguro que deseas completar esta tarea?</h1>
                 <div>
