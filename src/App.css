@@ -14,9 +14,6 @@ body{
   text-decoration: line-through;
   color: #ccc;
 }
-.infoTask{
-  color: #333;
-}
 .hidden{
   display: none;
 }
@@ -261,6 +258,15 @@ textarea{
   width: 300px;
   max-width: 100%;
   text-align: start;
+}
+.h-infoTask{
+  display: flex;
+  align-items: end;
+  margin-bottom: 0;
+}
+.p-infoTask{
+  color: #333;
+  margin-left: 25px;
 }
 
 /* --modal-tasksCompleted */

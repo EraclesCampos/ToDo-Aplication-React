@@ -27,7 +27,6 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
 
     if (!visible) return null;
     
-  
     const handleSubmit = (e)=>{
         e.preventDefault()
         if(!input.trim()){
@@ -54,8 +53,8 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
     }
 
     const closeModal = ()=>{
-        onClose()
         setError(false)
+        onClose()
     }
 
     return (
