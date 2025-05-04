@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import '../App.css'
 export function CompleteModal({ isShowComplete, setTasks, idTask, onClose}){
-     const [visible, setVisible] = useState(isShowComplete)
+    const [visible, setVisible] = useState(isShowComplete)
     
-    // console.log(isOpenFormAdd)
-
     useEffect(() => {
         if (isShowComplete) setVisible(true)
         else setTimeout(() => setVisible(false), 250)

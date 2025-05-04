@@ -6,8 +6,6 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
     const [error, setError] = useState(false)
     const [visible, setVisible] = useState(isOpenFormAdd)
 
-    // console.log(isOpenFormAdd)
-
     useEffect(() => {
         if (isOpenFormAdd) setVisible(true)
         else setTimeout(() => setVisible(false), 250)
@@ -40,7 +38,6 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
         textarea.value = ''
         dateInput.value = ''
         closeModal()
-        // console.log(tarea)
     }
 
     const closeModal = ()=>{

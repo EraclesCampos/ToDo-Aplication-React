@@ -25,17 +25,14 @@ export function DetailsModal({ isShowDetailsTask, tasks, idTask, onClose}){
                     <div>
                         <h4>Titulo</h4>
                         {task.title ? <p className="taskName infoTask">{task.title}</p> : <p className="taskName infoTask">Sin titulo</p>}
-                        {/* <p className="taskName"></p> */}
                     </div>
                     <div>
                         <h4>Descripcion</h4>
                         {task.description ? <p className="taskDescription infoTask">{task.description}</p> : <p className="taskDescription infoTask">Sin descripcion</p>}
-                        {/* <p className="taskDescription"></p> */}
                     </div>
                     <div>
                         <h4>Fecha</h4>
                         {task.date ? <p className="taskDate infoTask">{fechaEscrita}</p> : <p className="taskDate infoTask">Sin fecha</p>}
-                        {/* <p className="taskDate"></p> */}
                     </div>   
                 </div>
             </div>

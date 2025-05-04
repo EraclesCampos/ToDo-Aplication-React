@@ -9,7 +9,6 @@ import { DetailsModal } from './components/detailsModal'
 
 function App() {
   const [tasks, setTasks] = useState(localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [])
-  // const [task, setTarea] = useState('')
   const [isOpenFormAdd, setIsOpenFormAdd] = useState(false)
   const [isOpenFormEdit, setIsOpenFormEdit] = useState(false)
   const [isShowComplete, setShowComplete] = useState(false)

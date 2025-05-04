@@ -8,7 +8,6 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
     const [error, setError] = useState(false)
     const [visible, setVisible] = useState(isOpenFormEdit)
     
-    // console.log(isOpenFormEdit)
     useEffect(() => {
         const index = tasks.findIndex(task => task.id === idTaskEdit)
         const taskToEdit = tasks[index]
@@ -52,7 +51,6 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
         setTextarea('')
         setDateInput('')
         closeModal()
-        // console.log(tarea)
     }
 
     const closeModal = ()=>{

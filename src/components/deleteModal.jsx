@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import '../App.css'
 export function DeleteModal({ isShowDelete, setTasks, idTask, onClose}){
-     const [visible, setVisible] = useState(isShowDelete)
-    
-    // console.log(isOpenFormAdd)
+    const [visible, setVisible] = useState(isShowDelete)
 
     useEffect(() => {
         if (isShowDelete) setVisible(true)
