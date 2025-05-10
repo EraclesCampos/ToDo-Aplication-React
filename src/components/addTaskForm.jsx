@@ -9,6 +9,7 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
     useEffect(() => {
         if (isOpenFormAdd) setVisible(true)
         else setTimeout(() => setVisible(false), 250)
+        setError(false)
         
     }, [isOpenFormAdd])
 

@@ -22,6 +22,7 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
     useEffect(() => {
         if (isOpenFormEdit) setVisible(true)
         else setTimeout(() => setVisible(false), 250)
+        setError(false)
         
     }, [isOpenFormEdit])
 
