@@ -238,6 +238,7 @@ textarea{
   max-width: 500px;
   width: 400px;
   min-height: 400px;
+  padding-bottom: 20px;
   background: #fff;
   text-align: center;
   border-radius: 5px;
@@ -259,6 +260,9 @@ textarea{
   max-width: 100%;
   /* min-width: max-content; */
   text-align: start;
+}
+.details-task-container > div:first-of-type > div:last-of-type{
+  min-width: max-content;
 }
 .h-infoTask{
   display: flex;
