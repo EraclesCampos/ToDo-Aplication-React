@@ -257,7 +257,7 @@ textarea{
 .details-task-container > div:first-of-type > div{
   width: 300px;
   max-width: 100%;
-  min-width: max-content;
+  /* min-width: max-content; */
   text-align: start;
 }
 .h-infoTask{
