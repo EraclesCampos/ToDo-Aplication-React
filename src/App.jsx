@@ -33,20 +33,31 @@ function App() {
     const notifiedTasks = new Set()
   
     const interval = setInterval(() => {
-      const ahora = new Date()
-  
+      
       tasks.forEach(task => {
+        const ahora = new Date()
         const fechaRecordatorio = new Date(task.date)
-        if (!task.completed && fechaRecordatorio <= ahora) {
+        if (!task.completed && ahora >= fechaRecordatorio && !task.rememberOnceADay) {
           mostrarNotificacion(task.title)
           notifiedTasks.add(task.id)
         }
+        if (!task.completed && ahora >= fechaRecordatorio && task.rememberOnceADay) {
+          const hoy = ahora.toDateString()
+          if (task.lastNotified !== hoy) {
+            mostrarNotificacion(task.title)
+            task.lastNotified = hoy
+            guardarEnLocalStorage(tasks)
+          }
+        }
       })
-      console.log("verificado")
     }, 60000)
   
     return () => clearInterval(interval)
   }, [tasks])
+
+  function guardarEnLocalStorage(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }
 
   function mostrarNotificacion(task) {
     if (Notification.permission === 'granted') {

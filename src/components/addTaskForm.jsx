@@ -20,6 +20,7 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
         const input = document.getElementById('add-input')
         const textarea = document.getElementById('descripcion-input')
         const dateInput = document.getElementById('date-input')
+        const remeberOnceADay = document.getElementById('checkbox')
         if(!input.value.trim()){
             setError(true)
             return;
@@ -29,7 +30,9 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
             title: input.value.trim(),
             description: textarea.value.trim(),
             date: dateInput.value,
+            rememberOnceADay: remeberOnceADay.checked,
             completed: false,
+            lastNotified: null,
         }
         const tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
         tasks.push(tarea)
@@ -62,6 +65,10 @@ export function AddTareaForm({isOpenFormAdd, setTasks, onClose}) {
                 <div>
                     <label htmlFor="date-input">Agregar recordatorio</label>
                     <input type="datetime-local" name="" id="date-input"className="data-form" min="" />
+                </div>
+                <div className='flex-row'>
+                    <label htmlFor="checkbox">Recordar una vez al dia</label>
+                    <input type="checkbox" name="" id="checkbox" />
                 </div>
                 <div className="btns-form">
                     <input type="button" value="Cancelar" className="cancelForm" onClick={closeModal}/>

@@ -5,6 +5,8 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
     const [input, setInput] = useState('')
     const [textarea, setTextarea] = useState('')
     const [dateInput, setDateInput] = useState('')
+    const [remeberOnceADay, setRemeberOnceADay] = useState(false)
+    const [lastNotified, setLastNotified] = useState(null)
     const [error, setError] = useState(false)
     const [visible, setVisible] = useState(isOpenFormEdit)
     
@@ -16,6 +18,8 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
         setInput(taskToEdit.title.trim())
         setTextarea(taskToEdit.description.trim())
         setDateInput(taskToEdit.date)
+        setRemeberOnceADay(taskToEdit.rememberOnceADay || false)
+        setLastNotified(taskToEdit.lastNotified || null)
     }
     , [idTaskEdit, tasks, isOpenFormEdit])
     
@@ -39,7 +43,9 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
             title: input,
             description: textarea,
             date: dateInput,
+            rememberOnceADay: remeberOnceADay,
             completed: false,
+            lastNotified: lastNotified,
         }
         const index = tasks.findIndex(task => task.id === idTaskEdit)
         const newTasks = [...tasks]
@@ -50,6 +56,7 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
         setInput('')
         setTextarea('')
         setDateInput('')
+        setRemeberOnceADay(false)
         closeModal()
     }
 
@@ -75,6 +82,10 @@ export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClo
                   <label htmlFor="date-input-edit">Agregar recordatorio</label>
                   <input type="datetime-local" name="" id="date-input-edit" className="data-form" value={dateInput} onChange={(e) => setDateInput(e.target.value)} />
               </div>
+              <div className='flex-row'>
+                    <label htmlFor="checkbox">Recordar una vez al dia</label>
+                    <input type="checkbox" name="" id="checkbox" checked={remeberOnceADay} onChange={(e) => setRemeberOnceADay(e.target.checked)}/>
+                </div>
               <div className="btns-form">
                   <input type="button" value="Cancelar" className="cancelForm" onClick={closeModal}/>
                   <input type="submit" value="Aceptar" className="addForm" onClick={handleSubmit}/>

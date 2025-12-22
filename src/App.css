@@ -179,7 +179,7 @@ body{
   margin: 30px 30px;
   display: inline-block;
 }
-.form-modal-container >div:not(:last-child){
+.form-modal-container >div:not(:last-child):not(.flex-row){
   display: flex;
   flex-direction: column;
   max-width: 300px;
@@ -188,6 +188,20 @@ body{
 }
 .form-modal-container > div:not(:last-child) > input:focus,textarea:focus{
   border: 1.5px solid #35ae71;
+}
+.flex-row{
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 0;
+}
+input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  accent-color: #3586ae; /* color moderno */
+  cursor: pointer;
 }
 textarea{
   max-width: 300px;
@@ -373,6 +387,9 @@ textarea{
   .h3-container{
       width: 100%;
   }
+  .check-delete{
+    padding-bottom: 10px;
+  }
 }
 @media(max-width:800px){
   .global-container{
@@ -381,6 +398,7 @@ textarea{
   .tareas-container{
       width: 90%;
   }
+  
 }
 
 /* --Animaciones-- */
