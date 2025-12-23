@@ -36,14 +36,18 @@ function App() {
       
       tasks.forEach(task => {
         const ahora = new Date()
+        const hora = ahora.getHours()
+        const minutos = ahora.getMinutes()
+        console.log(hora + " " + minutos)
         const fechaRecordatorio = new Date(task.date)
         if (!task.completed && ahora >= fechaRecordatorio && !task.rememberOnceADay) {
           mostrarNotificacion(task.title)
           notifiedTasks.add(task.id)
         }
-        if (!task.completed && ahora >= fechaRecordatorio && task.rememberOnceADay) {
+        if (!task.completed && hora >= fechaRecordatorio.getHours() && minutos >= fechaRecordatorio.getMinutes() && task.rememberOnceADay) {
+          console.log("dentro")
           const hoy = ahora.toDateString()
-          if (task.lastNotified !== hoy) {
+          if (task.lastNotified !== hoy || task.lastNotified === null) {
             mostrarNotificacion(task.title)
             task.lastNotified = hoy
             guardarEnLocalStorage(tasks)
