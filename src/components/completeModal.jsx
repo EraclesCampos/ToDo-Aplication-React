@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../App.css'
+import { saveLocalStorage } from '../utils/saveLocalStorage';
 export function CompleteModal({ isShowComplete, setTasks, idTask, onClose}){
     const [visible, setVisible] = useState(isShowComplete)
     
@@ -19,7 +20,7 @@ export function CompleteModal({ isShowComplete, setTasks, idTask, onClose}){
         if(!taskToComplete) return
         taskToComplete.completed = true
         tasks[index] = taskToComplete
-        localStorage.setItem('tasks', JSON.stringify(tasks))
+        saveLocalStorage(tasks)
         setTasks(tasks)
         onClose()
     }

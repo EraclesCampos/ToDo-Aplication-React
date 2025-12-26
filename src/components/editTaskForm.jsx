@@ -1,96 +1,68 @@
 import React, { useEffect, useState } from 'react'
 import '../App.css'
+import { Form } from './form'
+import { useTasksFormContext } from '../Contexts/TaskFormContext'
+import { saveLocalStorage } from '../utils/saveLocalStorage'
 
-export function EditTaskForm({isOpenFormEdit, setTasks, tasks, idTaskEdit, onClose}) {
-    const [input, setInput] = useState('')
-    const [textarea, setTextarea] = useState('')
-    const [dateInput, setDateInput] = useState('')
-    const [remeberOnceADay, setRemeberOnceADay] = useState(false)
+export function EditTaskForm({isOpenedFormEdit, setTasks, tasks, idTaskEdit, onClose}) {
     const [lastNotified, setLastNotified] = useState(null)
     const [error, setError] = useState(false)
-    const [visible, setVisible] = useState(isOpenFormEdit)
+    const [visible, setVisible] = useState(isOpenedFormEdit)
+    const {loadTaskToEdit, resetForm} = useTasksFormContext()
     
     useEffect(() => {
         const index = tasks.findIndex(task => task.id === idTaskEdit)
         const taskToEdit = tasks[index]
         if(!taskToEdit) return 
 
-        setInput(taskToEdit.title.trim())
-        setTextarea(taskToEdit.description.trim())
-        setDateInput(taskToEdit.date)
-        setRemeberOnceADay(taskToEdit.rememberOnceADay || false)
-        setLastNotified(taskToEdit.lastNotified || null)
+        loadTaskToEdit(taskToEdit)
     }
-    , [idTaskEdit, tasks, isOpenFormEdit])
+    , [idTaskEdit, tasks, isOpenedFormEdit])
     
     useEffect(() => {
-        if (isOpenFormEdit) setVisible(true)
+        if (isOpenedFormEdit) setVisible(true)
         else setTimeout(() => setVisible(false), 250)
         setError(false)
         
-    }, [isOpenFormEdit])
+    }, [isOpenedFormEdit])
 
     if (!visible) return null;
-    
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-        if(!input.trim()){
+
+    const handleSubmit = (params)=>{
+        if(!params.title.trim()){
             setError(true)
             return
         }
         const tarea = {
             id: Date.now(),
-            title: input,
-            description: textarea,
-            date: dateInput,
-            rememberOnceADay: remeberOnceADay,
+            title: params.title,
+            description: params.description,
+            date: params.date,
+            rememberOnceADay: params.rememberOnceADay,
             completed: false,
             lastNotified: lastNotified,
         }
         const index = tasks.findIndex(task => task.id === idTaskEdit)
         const newTasks = [...tasks]
         newTasks[index] = tarea
-        localStorage.setItem('tasks', JSON.stringify(newTasks))
+        saveLocalStorage(newTasks)
         setTasks(newTasks)
 
-        setInput('')
-        setTextarea('')
-        setDateInput('')
-        setRemeberOnceADay(false)
         closeModal()
     }
 
     const closeModal = ()=>{
-        setError(false)
         onClose()
+        setError(false)
+        resetForm()
     }
 
     return (
-        <div className={`edit-modal modal showed ${isOpenFormEdit ? 'bg-modal-entered' : 'bg-modal-leaving'}`} onClick={onClose}>
-          <form className={`form-modal-container edit-form ${isOpenFormEdit ? 'modal-entered' : 'modal-leaving'}`} onClick={(e) => e.stopPropagation()}>
-              <h2>Editar tarea</h2>
-              <div>
-                  <label htmlFor="add-input-edit">Titulo</label>
-                  <input type="text" name="" id="add-input-edit" className="data-form" value={input} onChange={(e) => setInput(e.target.value)} autoComplete="off" required/>
-                  {error && <p className='error'>Campo obligatorio</p>}
-              </div>
-              <div>
-                  <label htmlFor="descripcion-input-edit">Descripcion</label>
-                  <textarea name="" id="descripcion-input-edit"className="data-form" value={textarea} onChange={(e) => setTextarea(e.target.value)}></textarea>
-              </div>
-              <div>
-                  <label htmlFor="date-input-edit">Agregar recordatorio</label>
-                  <input type="datetime-local" name="" id="date-input-edit" className="data-form" value={dateInput} onChange={(e) => setDateInput(e.target.value)} />
-              </div>
-              <div className='flex-row'>
-                    <label htmlFor="checkbox">Recordar una vez al dia</label>
-                    <input type="checkbox" name="" id="checkbox" checked={remeberOnceADay} onChange={(e) => setRemeberOnceADay(e.target.checked)}/>
-                </div>
-              <div className="btns-form">
-                  <input type="button" value="Cancelar" className="cancelForm" onClick={closeModal}/>
-                  <input type="submit" value="Aceptar" className="addForm" onClick={handleSubmit}/>
-              </div>
-          </form>
-      </div>
+        <Form
+            isOpenedForm={isOpenedFormEdit}
+            onClose={closeModal}
+            onUpdate={handleSubmit}
+            error={error}
+        />
     )
   }

@@ -5,12 +5,14 @@ import { EditTaskForm } from './components/editTaskForm'
 import { CompleteModal } from './components/completeModal'
 import { DeleteModal } from './components/deleteModal'
 import { DetailsModal } from './components/detailsModal'
+import { useTasksFormContext } from './Contexts/TaskFormContext'
+import { saveLocalStorage } from './utils/saveLocalStorage'
 
 
 function App() {
   const [tasks, setTasks] = useState(localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : [])
-  const [isOpenFormAdd, setIsOpenFormAdd] = useState(false)
-  const [isOpenFormEdit, setIsOpenFormEdit] = useState(false)
+  const [isOpenedFormAdd, setisOpenedFormAdd] = useState(false)
+  const [isOpenedFormEdit, setisOpenedFormEdit] = useState(false)
   const [isShowComplete, setShowComplete] = useState(false)
   const [isShowDelete, setShowDelete] = useState(false)
   const [isShowDetailsTask, setShowDetailsTask] = useState(false)
@@ -48,7 +50,7 @@ function App() {
           if (task.lastNotified !== hoy || task.lastNotified === null) {
             mostrarNotificacion(task.title)
             task.lastNotified = hoy
-            guardarEnLocalStorage(tasks)
+            saveLocalStorage(tasks)
           }
         }
       })
@@ -57,9 +59,6 @@ function App() {
     return () => clearInterval(interval)
   }, [tasks])
 
-  function guardarEnLocalStorage(tasks) {
-    localStorage.setItem('tasks', JSON.stringify(tasks))
-  }
 
   function mostrarNotificacion(task) {
     if (Notification.permission === 'granted') {
@@ -98,18 +97,18 @@ function App() {
                 <div className="check-delete">
                     <button className='check' title='Marcar tarea como completada' onClick={()=>{setIdTask(task.id); setShowComplete(true)}}><img src='images/check.png'/></button>   
                     <button className="delete" title='Eliminar tarea' onClick={()=>{setIdTask(task.id); setShowDelete(true)}}><img src='images/delete.png'/></button>
-                    <button className='edit' title='Editar tarea' onClick={()=>{setIdTask(task.id); setIsOpenFormEdit(true)}}><img src='images/edit.png'/></button>
+                    <button className='edit' title='Editar tarea' onClick={()=>{setIdTask(task.id); setisOpenedFormEdit(true)}}><img src='images/edit.png'/></button>
                     <button className="details" title='Ver detalles de la tarea' onClick={()=>{setIdTask(task.id); setShowDetailsTask(true)}}><img src='images/info.png'/></button>
                 </div>
               </div>)
             })}
         </div>
         <div className="add-container">
-            <button className="add" title="agregar" onClick={()=>setIsOpenFormAdd(!isOpenFormAdd)}><img src="images/add.png" alt="agregar" /></button>
+            <button className="add" title="agregar" onClick={()=>setisOpenedFormAdd(!isOpenedFormAdd)}><img src="images/add.png" alt="agregar" /></button>
         </div>
       </div>
-      <AddTareaForm isOpenFormAdd={isOpenFormAdd} setTasks={setTasks} onClose={()=>setIsOpenFormAdd(false)}/>
-      <EditTaskForm isOpenFormEdit={isOpenFormEdit} setTasks={setTasks} tasks={tasks} idTaskEdit={idTask} onClose={()=>setIsOpenFormEdit(false)}/>
+      <AddTareaForm isOpenedFormAdd={isOpenedFormAdd} setTasks={setTasks} onClose={()=>setisOpenedFormAdd(false)}/>
+      <EditTaskForm isOpenedFormEdit={isOpenedFormEdit} setTasks={setTasks} tasks={tasks} idTaskEdit={idTask} onClose={()=>setisOpenedFormEdit(false)}/>
       <CompleteModal isShowComplete={isShowComplete} setTasks={setTasks} idTask={idTask} onClose={()=>setShowComplete(false)}/>
       <DeleteModal isShowDelete={isShowDelete} setTasks={setTasks} idTask={idTask} onClose={()=>setShowDelete(false)}/>
       <DetailsModal isShowDetailsTask={isShowDetailsTask} tasks={tasks} idTask={idTask} onClose={()=>setShowDetailsTask(false)}/>

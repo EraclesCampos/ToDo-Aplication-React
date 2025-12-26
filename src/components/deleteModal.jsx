@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import '../App.css'
+import { saveLocalStorage } from '../utils/saveLocalStorage';
 export function DeleteModal({ isShowDelete, setTasks, idTask, onClose}){
     const [visible, setVisible] = useState(isShowDelete)
 
@@ -18,7 +19,7 @@ export function DeleteModal({ isShowDelete, setTasks, idTask, onClose}){
         const taskToDelete = tasks[index]
         if(!taskToDelete) return
         const newTasks = tasks.filter(task => task.id !== idTask)
-        localStorage.setItem('tasks', JSON.stringify(newTasks))
+        saveLocalStorage(newTasks)
         setTasks(newTasks)
         onClose()
     }
