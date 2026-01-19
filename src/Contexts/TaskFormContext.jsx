@@ -26,7 +26,7 @@ export function TasksFormProvider({children}){
     const loadTaskToEdit = (task) => {
         setFormValues({
             title: task.title,
-            desceription: task.description,
+            description: task.description,
             date: task.date,
             rememberOnceADay: task.rememberOnceADay,
         })
