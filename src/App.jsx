@@ -45,7 +45,7 @@ function App() {
           mostrarNotificacion(task.title)
           notifiedTasks.add(task.id)
         }
-        if (!task.completed && hora >= fechaRecordatorio.getHours() && minutos >= fechaRecordatorio.getMinutes() && task.rememberOnceADay) {
+        if (!task.completed && ahora >= fechaRecordatorio && task.rememberOnceADay) {
           const hoy = ahora.toDateString()
           if (task.lastNotified !== hoy || task.lastNotified === null) {
             mostrarNotificacion(task.title)
